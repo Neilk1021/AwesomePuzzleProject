@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum AudioID
+[System.Serializable]
+public class AudioData
 {
-    MainBgm,
-    BubbleSfx,
-    GoatSfx,
+    public string name;
+    public AudioClip clip;
 }
 
 
@@ -16,23 +16,39 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource bgmSource;
     [SerializeField] private AudioSource sfxSource;
 
-    [Tooltip("MainBgm,\r\n    BubbleSfx,\r\n    GoatSfx,")]
-    [SerializeField] private AudioClip[] audioList;
+    [SerializeField] private AudioData[] audioDatas;
+
+    private Dictionary<string, AudioClip> clipDict;
 
     private void Awake()
     {
         instance = this;
+        BuildAudioDictionary();
     }
 
-    public static void PlayBGM(AudioID audioId, float volume = 1)
+    private void BuildAudioDictionary()
     {
-        instance.bgmSource.clip = instance.audioList[(int)audioId];
-        instance.bgmSource.loop = true;
+        clipDict = new Dictionary<string, AudioClip> ();
+        foreach (var data in audioDatas)
+        {
+            clipDict[data.name] = data.clip;
+        }
+    }
+
+    public static void PlayBGM(string name, float volume = 1, bool loop=true)
+    {
+        instance.bgmSource.clip = instance.clipDict[name];
+
+        if (loop)
+            instance.bgmSource.loop = true;
+        else
+            instance.bgmSource.loop = false;
+        
         instance.bgmSource.volume = volume;
         instance.bgmSource.Play();
     }
-    public static void PlaySFX(AudioID audioId, float volume=1)
+    public static void PlaySFX(string name, float volume=1)
     {
-        instance.sfxSource.PlayOneShot(instance.audioList[(int)audioId],  volume);
+        instance.sfxSource.PlayOneShot(instance.clipDict[name],  volume);
     }
 }

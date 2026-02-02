@@ -7,7 +7,7 @@ public class somethingThatCallsManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        AudioManager.PlayBGM(AudioID.MainBgm, 1);
+        AudioManager.PlayBGM("bgm", 1);
     }
 
     // Update is called once per frame
@@ -15,12 +15,12 @@ public class somethingThatCallsManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            AudioManager.PlaySFX(AudioID.BubbleSfx, 1);
+            AudioManager.PlaySFX("bubble", 1);
         }
 
         if (Input.GetKeyDown(KeyCode.W))
         {
-            AudioManager.PlaySFX(AudioID.GoatSfx, 1);
+            AudioManager.PlaySFX("goat", 1);
         }
     }
 }
