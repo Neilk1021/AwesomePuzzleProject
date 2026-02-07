@@ -1,18 +1,31 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.Tilemaps;
 
-public class Tile : MonoBehaviour
+public class Tile : MonoBehaviour, IDropHandler
 {
     [SerializeField] private Color baseColor, uiColor; //offsetColor
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private GameObject highlight;
+    
+    public Vector2Int gridPosition;
+    private GridManager _gridData;
 
-    public void Init()
+    public void Init(Vector2Int pos, GridManager data)
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        
+        gridPosition = pos;
+        _gridData = data;
+    }
+
+    public void OnDrop(PointerEventData eventData)
+    {
+        
     }
     
     private void OnMouseEnter()

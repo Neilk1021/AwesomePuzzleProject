@@ -2,31 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GridManager : MonoBehaviour
+public class GridManager : ScriptableObject
 {
-    [SerializeField] private int width, height;
+    public int width = 6;
+    public int height = 6;
+    public float tileSize = 1f;
     
-    [SerializeField] private Tile tilePrefab;
+    public Dictionary<Vector2Int, RobotComponent> PlacedComponent = new Dictionary<Vector2Int, RobotComponent>();
 
-    [SerializeField] private Transform sceneCamera;
-    
-    void Start()
+    public void ClearGrid()
     {
-        GenerateGrid();
+        PlacedComponent.Clear();
+    }
+
+    public bool IsOccupied(Vector2Int pos)
+    {
+        return PlacedComponent.ContainsKey(pos);
+    }
+
+    public void PlaceComponent(Vector2Int pos, RobotComponent component)
+    {
+        PlacedComponent[pos] = component;
     }
     
-    void GenerateGrid()
+    public void RemoveComponent(Vector2Int pos)
     {
-        for (int x = 0; x < width; x++){
-            for (int y = 0; y < height; y++){
-                var spawnedTile = Instantiate(tilePrefab, new Vector3(x, y), Quaternion.identity);
-                spawnedTile.name = "Tile_" + x + "_" + y;
-                spawnedTile.Init();
-                //var isOffset = (x % 2 == 0 && y % 2 != 0) || (x % 2 != 0 && y % 2 == 0);
-                //spawnedTile.Init(isOffset);
-            }
-        }
-        
-        sceneCamera.transform.position = new Vector3((float)width/2 -0.5f, (float)height/2 -0.5f, -10);    
+        if (PlacedComponent.ContainsKey(pos))
+            PlacedComponent.Remove(pos);
     }
 }
