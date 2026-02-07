@@ -15,6 +15,8 @@ public class Tile : MonoBehaviour, IDropHandler
     public Vector2Int gridPosition;
     private GridManager _gridData;
 
+    
+    //Dependency injection is good!
     public void Init(Vector2Int pos, GridManager data)
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
