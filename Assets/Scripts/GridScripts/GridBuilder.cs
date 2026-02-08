@@ -2,7 +2,7 @@
 
 public class GridBuilder : MonoBehaviour
 {
-    [SerializeField] GridManager gridData;
+    [SerializeField] GridData gridData;
     [SerializeField] private Tile tilePrefab;
     
     [SerializeField] private Transform sceneCamera;

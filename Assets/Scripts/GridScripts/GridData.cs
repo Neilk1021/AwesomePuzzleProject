@@ -5,7 +5,7 @@ using UnityEngine;
 
 //TODO Rename this to something data related rather than manager as thats confusing
 //TODO derive not from scriptable object, either monobehaviour if you want the start and update loop or a generic class if you dont 
-public class GridManager : ScriptableObject
+public class GridData : MonoBehaviour
 {
     public int width = 6;
     public int height = 6;

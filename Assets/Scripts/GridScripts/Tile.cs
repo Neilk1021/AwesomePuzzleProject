@@ -13,11 +13,11 @@ public class Tile : MonoBehaviour, IDropHandler
     [SerializeField] private GameObject highlight;
     
     public Vector2Int gridPosition;
-    private GridManager _gridData;
+    private GridData _gridData;
 
     
     //Dependency injection is good!
-    public void Init(Vector2Int pos, GridManager data)
+    public void Init(Vector2Int pos, GridData data)
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         
