@@ -7,30 +7,54 @@ using UnityEngine;
 //TODO derive not from scriptable object, either monobehaviour if you want the start and update loop or a generic class if you dont 
 public class GridData : MonoBehaviour
 {
-    public int width = 6;
+    public int width = 7;
     public int height = 6;
-    public float tileSize = 1f;
-    
-    public Dictionary<Vector2Int, RobotComponent> PlacedComponent = new Dictionary<Vector2Int, RobotComponent>();
 
-    public void ClearGrid()
-    {
-        PlacedComponent.Clear();
-    }
+    private RobotComponent[,] _grid;
 
-    public bool IsOccupied(Vector2Int pos)
+    public void Initialize()
     {
-        return PlacedComponent.ContainsKey(pos);
+        _grid = new RobotComponent[width, height];
     }
 
-    public void PlaceComponent(Vector2Int pos, RobotComponent component)
+    public bool IsInside(int x, int y)
     {
-        PlacedComponent[pos] = component;
+        return x >= 0 && x < width && y >= 0 && y < height;
     }
-    
-    public void RemoveComponent(Vector2Int pos)
+
+    public void Add(int x, int y, RobotComponent component)
     {
-        if (PlacedComponent.ContainsKey(pos))
-            PlacedComponent.Remove(pos);
+        if (!IsInside(x, y)) return;
+        _grid[x, y] = component;
     }
+
+    public void Remove(int x, int y)
+    {
+        if (!IsInside(x, y)) return;
+        _grid[x, y] = null;
+    }
+
+    public void Clear()
+    {
+        _grid = new RobotComponent[width, height];
+    }
+
+    public bool CheckAllValidLocations()
+    {
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                // here check if robot component is connected to something
+            }
+        }
+
+        return true;
+    }
+
+    public RobotComponent Get(int x, int y)
+    {
+        return _grid[x, y];
+    }
+
 }

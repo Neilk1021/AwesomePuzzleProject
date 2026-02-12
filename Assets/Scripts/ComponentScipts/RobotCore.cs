@@ -1,13 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class RobotCore : MonoBehaviour
+public class RobotCore : RobotComponent
 {
     private List<RobotComponent> _components = new List<RobotComponent>();
 
-    public void AddComponent(RobotComponent component)
+    public override void DestroySelf()
     {
-        _components.Add(component);
-        component.Initialize(this);
+        Debug.Log("Core cannot be deleted");
+    }
+
+    public override bool ValidConnection(string location)
+    {
+        return true;
     }
 }

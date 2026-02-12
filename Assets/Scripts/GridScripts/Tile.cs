@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Tilemaps;
 
-public class Tile : MonoBehaviour, IDropHandler
+public class Tile : MonoBehaviour
 {
     [SerializeField] private Color baseColor, uiColor; //offsetColor
     [SerializeField] private SpriteRenderer spriteRenderer;
@@ -17,17 +17,15 @@ public class Tile : MonoBehaviour, IDropHandler
 
     
     //Dependency injection is good!
-    public void Init(Vector2Int pos, GridData data)
+    public void Initialize(Vector2Int pos, GridData data)
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        
         gridPosition = pos;
         _gridData = data;
     }
 
-    public void OnDrop(PointerEventData eventData)
+    private void OnMouseDown()
     {
-        
+        Debug.Log($"Clicked tile: {gridPosition}");
     }
     
     private void OnMouseEnter()
