@@ -11,7 +11,8 @@ public class GridBuilder : MonoBehaviour
         {
             for (int y = 0; y < gridData.height; y++)
             {
-                Vector3 position = new Vector3(x, y, 0);
+                Vector3 offset = new Vector3(-gridData.width / 2f + 0.5f, -gridData.height / 2f + 0.5f, 0);
+                Vector3 position = new Vector3(x, y, 0) + offset;
                 
                 GameObject tileObj = Instantiate(tilePrefab, position, Quaternion.identity, gridParent);
 

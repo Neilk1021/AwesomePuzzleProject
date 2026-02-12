@@ -25,6 +25,7 @@ public class Tile : MonoBehaviour
 
     private void OnMouseDown()
     {
+        Debug.Log("meow meow");
         Debug.Log($"Clicked tile: {gridPosition}");
     }
     
