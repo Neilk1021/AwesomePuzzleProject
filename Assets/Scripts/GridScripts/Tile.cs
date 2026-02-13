@@ -23,7 +23,7 @@ public class Tile : MonoBehaviour
         _gridData = data;
     }
 
-    private void OnMouseDown()
+    void OnMouseDown()
     {
         Debug.Log("meow meow");
         Debug.Log($"Clicked tile: {gridPosition}");

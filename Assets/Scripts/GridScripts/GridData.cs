@@ -2,9 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-//TODO Rename this to something data related rather than manager as thats confusing
-//TODO derive not from scriptable object, either monobehaviour if you want the start and update loop or a generic class if you dont 
 public class GridData : MonoBehaviour
 {
     public int width = 7;
