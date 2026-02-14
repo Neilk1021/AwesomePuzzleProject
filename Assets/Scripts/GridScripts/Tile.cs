@@ -15,27 +15,39 @@ public class Tile : MonoBehaviour
     public Vector2Int gridPosition;
     private GridData _gridData;
 
-    
+    public Vector2Int palettePosition;
+    private PaletteData _paletteData;
+    [SerializeField] private SpriteRenderer itemsRenderer;
+
     //Dependency injection is good!
     public void Initialize(Vector2Int pos, GridData data)
     {
         gridPosition = pos;
         _gridData = data;
     }
-
+    
+    public void InitializePalette(Vector2Int pos, PaletteData data)
+    {
+        palettePosition = pos;
+        _paletteData = data;
+        
+        // Get single sprite
+        Sprite sprite = data.GetSpriteForPosition(pos);
+        
+        if (itemsRenderer != null && sprite != null)
+        {
+            itemsRenderer.sprite = sprite;
+        }
+    }
+    
     void OnMouseDown()
     {
         Debug.Log("meow meow");
         Debug.Log($"Clicked tile: {gridPosition}");
-    }
-    
-    private void OnMouseEnter()
-    {
-        //highlight.SetActive(true);
         SetAlpha(0.5f);
     }
     
-    private void OnMouseExit()
+    private void OnMouseUp()
     {
         //highlight.SetActive(false);
         SetAlpha(1.0f);
