@@ -14,6 +14,12 @@ public class somethingThatClearsALevel : MonoBehaviour
         if (nextLevel > maxUnlockedLevel)
         {
             PlayerPrefs.SetInt("UnlockedLevel", nextLevel);
+
+            print("unlocked level " + nextLevel);
+        }
+        else
+        {
+            print("level " + nextLevel + " was already unlocked");
         }
     }
 
