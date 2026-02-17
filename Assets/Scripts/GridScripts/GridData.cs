@@ -8,6 +8,7 @@ public class GridData : MonoBehaviour
     public int height = 6;
 
     private RobotComponent[,] _grid;
+    
 
     public void Initialize()
     {
@@ -54,4 +55,8 @@ public class GridData : MonoBehaviour
         return _grid[x, y];
     }
 
+    public bool CoreCheck(Vector2Int pos)
+    {
+        return (pos.x == width - 1 && pos.y == height - 1);
+    }
 }

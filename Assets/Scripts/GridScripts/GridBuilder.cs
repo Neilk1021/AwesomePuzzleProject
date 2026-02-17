@@ -4,9 +4,16 @@ public class GridBuilder : MonoBehaviour
 {
     [SerializeField] private GameObject tilePrefab;
     [SerializeField] private Transform gridParent;
+    [SerializeField] private PaletteManager paletteManager;
 
+    [SerializeField] private Sprite coreSprite;
+
+    public Tile[,] Tiles;
+    
     public void Build(GridData gridData)
     {
+        Tiles = new Tile[gridData.width, gridData.height];
+        
         for (int x = 0; x < gridData.width; x++)
         {
             for (int y = 0; y < gridData.height; y++)
@@ -20,11 +27,16 @@ public class GridBuilder : MonoBehaviour
                 {
                     tileObj.transform.SetParent(gridParent);
                 }
+                Tile map = tileObj.GetComponent<Tile>();
+                Tiles[x, y] = map;
                 
                 Tile tile = tileObj.GetComponent<Tile>();
-                tile.Initialize(new Vector2Int(x,y), gridData);
+                tile.Initialize(new Vector2Int(x, y), gridData, paletteManager);
             }
         }
+        Tile centerTile = Tiles[gridData.width / 2, gridData.height / 2];
+        centerTile.itemsRenderer.sprite = coreSprite;
+        //cant move??
     }
     
 }

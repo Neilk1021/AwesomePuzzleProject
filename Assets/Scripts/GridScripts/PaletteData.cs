@@ -7,6 +7,7 @@ public class PaletteData : MonoBehaviour
     public int height = 1;
     public int width = 5;
     public Sprite[] items;
+    
   
     public Sprite GetSpriteForPosition(Vector2Int pos)
     {
@@ -15,4 +16,10 @@ public class PaletteData : MonoBehaviour
             return items[index];
         return null;
     }
+
+    public bool TrashCanCheck(Vector2Int pos)
+    {
+        return pos.x == (width - 1);
+    }
+    
 }

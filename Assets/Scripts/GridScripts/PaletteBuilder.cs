@@ -8,6 +8,7 @@ public class PaletteBuilder : MonoBehaviour
 {
     [SerializeField] private GameObject tilePrefab;
     [SerializeField] private Transform paletteParent;
+    [SerializeField] private PaletteManager paletteManager;
     
     public void Build(PaletteData paletteData)
     {
@@ -26,7 +27,7 @@ public class PaletteBuilder : MonoBehaviour
                 }
                 
                 Tile tile = tileObj.GetComponent<Tile>();
-                tile.InitializePalette(new Vector2Int(x,y), paletteData);
+                tile.InitializePalette(new Vector2Int(x,y), paletteData, paletteManager);
             }
         }
     }
