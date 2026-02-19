@@ -4,20 +4,20 @@ using UnityEngine;
 
 public class GridData : MonoBehaviour
 {
-    public int width = 7;
     public int height = 6;
+    public int width = 7;
 
     private RobotComponent[,] _grid;
     
 
     public void Initialize()
     {
-        _grid = new RobotComponent[width, height];
+        _grid = new RobotComponent[height, width];
     }
 
     public bool IsInside(int x, int y)
     {
-        return x >= 0 && x < width && y >= 0 && y < height;
+        return x >= 0 && x < height && y >= 0 && y < width;
     }
 
     public void Add(int x, int y, RobotComponent component)
@@ -34,14 +34,14 @@ public class GridData : MonoBehaviour
 
     public void Clear()
     {
-        _grid = new RobotComponent[width, height];
+        _grid = new RobotComponent[height, width];
     }
 
     public bool CheckAllValidLocations()
     {
-        for (int x = 0; x < width; x++)
+        for (int x = 0; x < height; x++)
         {
-            for (int y = 0; y < height; y++)
+            for (int y = 0; y < width; y++)
             {
                 // here check if robot component is connected to something
             }
@@ -57,6 +57,6 @@ public class GridData : MonoBehaviour
 
     public bool CoreCheck(Vector2Int pos)
     {
-        return (pos.x == width - 1 && pos.y == height - 1);
+        return (pos.x == height - 1 && pos.y == width - 1);
     }
 }

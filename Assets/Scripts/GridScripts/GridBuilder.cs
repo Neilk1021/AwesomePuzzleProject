@@ -12,14 +12,14 @@ public class GridBuilder : MonoBehaviour
     
     public void Build(GridData gridData)
     {
-        Tiles = new Tile[gridData.width, gridData.height];
+        Tiles = new Tile[gridData.height, gridData.width];
         
-        for (int x = 0; x < gridData.width; x++)
+        for (int x = 0; x < gridData.height; x++)
         {
-            for (int y = 0; y < gridData.height; y++)
+            for (int y = 0; y < gridData.width; y++)
             {
                 Vector3 offset = new Vector3(-gridData.width / 2f + 0.5f, -gridData.height / 2f + 0.5f, 0);
-                Vector3 position = new Vector3(x, y, 0) + offset;
+                Vector3 position = new Vector3(y, x, 0) + offset;
                 
                 GameObject tileObj = Instantiate(tilePrefab, position, Quaternion.identity, gridParent);
 
@@ -34,7 +34,7 @@ public class GridBuilder : MonoBehaviour
                 tile.Initialize(new Vector2Int(x, y), gridData, paletteManager);
             }
         }
-        Tile centerTile = Tiles[gridData.width / 2, gridData.height / 2];
+        Tile centerTile = Tiles[gridData.height / 2, gridData.width / 2];
         centerTile.itemsRenderer.sprite = coreSprite;
         //cant move??
     }
