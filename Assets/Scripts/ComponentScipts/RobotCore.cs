@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 
 public class RobotCore : RobotComponent
 {
     private List<RobotComponent> _components = new List<RobotComponent>();
+    [SerializeField] GameObject temp;
 
     public void AddComponent(RobotComponent component)
     {
@@ -18,8 +20,27 @@ public class RobotCore : RobotComponent
         Debug.Log("Core cannot be deleted");
     }
 
-    public override bool ValidConnection(string location)
+    public void SpawnComponents()
     {
-        return true;
+        GameObject child = Instantiate(temp, transform);
+        child.transform.localPosition = new Vector3(1, 0);
     }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            transform.position += new Vector3(1, 0);
+        }
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            transform.position += new Vector3(-1, 0);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            SpawnComponents();
+        }
+    }
+
 }

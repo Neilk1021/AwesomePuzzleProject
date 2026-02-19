@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Wheel : RobotComponent
+public class Magnet : RobotComponent
 {
     public override void Initialize(Vector2Int pos)
     {
         base.Initialize(pos);
-        canConnectFromTop = true;
+        canConnectFromBottom = true;
     }
 
 }
