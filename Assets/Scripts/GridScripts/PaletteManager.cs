@@ -6,6 +6,8 @@ public class PaletteManager : MonoBehaviour
 {
     [SerializeField] private PaletteData _paletteData;
     [SerializeField] private PaletteBuilder _paletteBuilder;
+    [SerializeField] private GameObject trashIcon;
+    
     public Tile currTile;
     
     private void Awake()

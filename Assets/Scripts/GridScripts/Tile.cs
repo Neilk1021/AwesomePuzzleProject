@@ -69,7 +69,7 @@ public class Tile : MonoBehaviour
                         itemsRenderer.sprite = null;
                     }
 
-                    //gridData.ClearItemAt(gridPosition);
+                    _gridData.Remove(gridPosition.x,  gridPosition.y);
 
                     _paletteManager.ClearTileSelection();
                     
