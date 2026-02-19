@@ -1,8 +1,7 @@
 using System;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using System.Numerics;
-using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Tilemaps;
 
@@ -21,13 +20,14 @@ public class Tile : MonoBehaviour
     public SpriteRenderer itemsRenderer;
     [SerializeField] private PaletteManager _paletteManager;
     [SerializeField] private GridManager _gridManager;
-
-    //Dependency injection is good!
-    public void Initialize(Vector2Int pos, GridData data, PaletteManager manager)
+    [SerializeField] private PlacementPreview _placementPreview;
+    
+    public void Initialize(Vector2Int pos, GridData data, PaletteManager manager, PlacementPreview placementPreview)
     {
         gridPosition = pos;
         _gridData = data;
         _paletteManager = manager;
+        _placementPreview = placementPreview;
     }
 
     public void InitializePalette(Vector2Int pos, PaletteData data, PaletteManager manager)
@@ -93,6 +93,8 @@ public class Tile : MonoBehaviour
                     if (itemsRenderer != null && selectedSprite != null)
                     {
                         itemsRenderer.sprite = selectedSprite;
+                        itemsRenderer.transform.rotation =
+                            Quaternion.Euler(0f, 0f, _placementPreview.GetCurrentRotation());
                     }
                     _paletteManager.ClearTileSelection();
                 }

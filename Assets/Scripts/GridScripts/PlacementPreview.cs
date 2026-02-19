@@ -11,6 +11,7 @@ public class PlacementPreview : MonoBehaviour
     [SerializeField] private GridData gridData;
     
     private Camera _mainCamera;
+    private int currentRotation = 0;
     void Awake()
     {
         previewSprite.enabled = false;
@@ -20,11 +21,31 @@ public class PlacementPreview : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        HandleRotation();
         UpdatePreviewSprite();
         FollowMouse();
     }
 
-    public void UpdatePreviewSprite()
+    void HandleRotation()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            currentRotation += 90;
+
+            if (currentRotation >= 360)
+            {
+                currentRotation = 0;
+            }
+            
+            transform.rotation = Quaternion.Euler(0f, 0f, currentRotation);
+        }
+    }
+    public int GetCurrentRotation()
+    {
+        return currentRotation;
+    }
+    
+    void UpdatePreviewSprite()
     {
         if (!paletteManager)
         {

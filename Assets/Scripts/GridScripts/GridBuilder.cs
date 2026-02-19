@@ -5,6 +5,7 @@ public class GridBuilder : MonoBehaviour
     [SerializeField] private GameObject tilePrefab;
     [SerializeField] private Transform gridParent;
     [SerializeField] private PaletteManager paletteManager;
+    [SerializeField] private PlacementPreview placementPreview;
 
     [SerializeField] private Sprite coreSprite;
 
@@ -31,7 +32,7 @@ public class GridBuilder : MonoBehaviour
                 Tiles[x, y] = map;
                 
                 Tile tile = tileObj.GetComponent<Tile>();
-                tile.Initialize(new Vector2Int(x, y), gridData, paletteManager);
+                tile.Initialize(new Vector2Int(x, y), gridData, paletteManager, placementPreview );
             }
         }
         Tile centerTile = Tiles[gridData.height / 2, gridData.width / 2];
