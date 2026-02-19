@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class NewBehaviourScript : MonoBehaviour
+public class ChangeScenes : MonoBehaviour
 {
-    public void GoToNewScene()
+    public void GoToLevelMenu()
     {
-        SceneManager.LoadScene("EmptyScene");
+        SceneManager.LoadScene("LevelMenu");
     }
 }
