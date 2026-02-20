@@ -92,9 +92,13 @@ public class Tile : MonoBehaviour
                     Sprite selectedSprite = _paletteManager.GetSelectedItemSprite();
                     if (itemsRenderer != null && selectedSprite != null)
                     {
+                        // Update visual
                         itemsRenderer.sprite = selectedSprite;
                         itemsRenderer.transform.rotation =
                             Quaternion.Euler(0f, 0f, _placementPreview.GetCurrentRotation());
+                        
+                        // Logic component
+                        
                     }
                     _paletteManager.ClearTileSelection();
                 }
