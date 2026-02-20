@@ -15,21 +15,21 @@ public class GridData : MonoBehaviour
         _grid = new RobotComponent[height, width];
     }
 
-    public bool IsInside(int x, int y)
+    public bool IsInside(int row, int col)
     {
-        return x >= 0 && x < height && y >= 0 && y < width;
+        return row >= 0 && row < height && col >= 0 && col < width;
     }
 
-    public void Add(int x, int y, RobotComponent component)
+    public void Add(int row, int col, RobotComponent component)
     {
-        if (!IsInside(x, y)) return;
-        _grid[x, y] = component;
+        if (!IsInside(row, col)) return;
+        _grid[row, col] = component;
     }
 
-    public void Remove(int x, int y)
+    public void Remove(int row, int col)
     {
-        if (!IsInside(x, y)) return;
-        _grid[x, y] = null;
+        if (!IsInside(row, col)) return;
+        _grid[row, col] = null;
     }
 
     public void Clear()
@@ -37,17 +37,71 @@ public class GridData : MonoBehaviour
         _grid = new RobotComponent[height, width];
     }
 
-    public bool CheckAllValidLocations()
+    public bool ValidateBot()
     {
-        for (int x = 0; x < height; x++)
+        for (int row= 0; row < height; row++)
         {
-            for (int y = 0; y < width; y++)
+            for (int col = 0; col < width; col++)
             {
-                // here check if robot component is connected to something
+                RobotComponent component = _grid[row, col];
+                if (component == null || component is RobotCore)
+                    continue;
+                if (!(
+                    (component.canConnectFromLeft && HasComponentAt(row, col-1)) || 
+                    (component.canConnectFromRight && HasComponentAt(row, col+1)) ||
+                    (component.canConnectFromTop && HasComponentAt(row-1, col)) ||
+                    (component.canConnectFromBottom && HasComponentAt(row+1, col))
+                    ))
+                {
+                    return false;
+                }
             }
         }
 
         return true;
+    }
+
+    
+    
+    // "unittest" cuz im stupid and lazy
+    public void TestValidation()
+    {
+        Initialize();
+        GameObject robotCore = new GameObject("Robot Core");
+        RobotComponent coreScript = robotCore.AddComponent<RobotCore>();
+        coreScript.Initialize(new Vector2Int(3, 3));
+        Add(3, 3, coreScript);
+        Debug.Assert(ValidateBot() == true);
+        GameObject wheel = new GameObject("Wheel");
+        RobotComponent wheelScript = wheel.AddComponent<Wheel>();
+        wheelScript.Initialize(new Vector2Int(4, 3));
+        Add(4, 3, wheelScript);
+        Debug.Assert(ValidateBot() == true);
+        GameObject wheel2 = new GameObject("Invalid Wheel");
+        RobotComponent wheel2Script = wheel2.AddComponent<Wheel>();
+        Add(5, 5, wheel2Script);
+        Debug.Assert(ValidateBot() == false);
+
+        for (int x = 0; x < height; x++)
+        {
+            string row = "";
+            for (int y = 0; y < width; y++)
+            {
+                if (_grid[x, y] == null)
+                    row += "null, ";
+                row += _grid[x, y] + ", ";
+
+            }
+            print(row);
+        }
+    }
+
+    private bool HasComponentAt(int x, int y)
+    {
+        if (x < 0 || y < 0 || x >= width || y >= height)
+            return false;
+        else
+            return _grid[x, y] != null;
     }
 
     public RobotComponent Get(int x, int y)
