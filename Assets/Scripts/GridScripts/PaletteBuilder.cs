@@ -27,11 +27,15 @@ public class PaletteBuilder : MonoBehaviour
                 }
                 
                 Tile tile = tileObj.GetComponent<Tile>();
-                tile.InitializePalette(new Vector2Int(x,y), paletteData, paletteManager);
+                Vector2Int gridPos = new Vector2Int(x, y);
+                tile.InitializePalette(gridPos, paletteManager);
+                
+                Sprite sprite = paletteData.GetSpriteForPosition(gridPos);
+                tile.SetIcon(sprite);
+                
             }
         }
     }
-    
     
 }
 

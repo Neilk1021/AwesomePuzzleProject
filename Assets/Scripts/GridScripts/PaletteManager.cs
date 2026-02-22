@@ -6,7 +6,6 @@ public class PaletteManager : MonoBehaviour
 {
     [SerializeField] private PaletteData _paletteData;
     [SerializeField] private PaletteBuilder _paletteBuilder;
-    [SerializeField] private GameObject trashIcon;
     
     public Tile currTile;
     
@@ -49,21 +48,24 @@ public class PaletteManager : MonoBehaviour
         }
     }
 
-    public Sprite GetSelectedItemSprite()
+    public RobotComponentType GetSelectedComponentType()
     {
-        if (currTile != null && currTile._paletteData != null)
-        {
-            return currTile._paletteData.GetSpriteForPosition(currTile.palettePosition);
-        }
-        return null;
+        if (currTile == null)
+            return RobotComponentType.None;
+        return _paletteData.GetTypeForPosition(currTile.palettePosition);
+    }
+
+    public Sprite GetSelectedSprite()
+    {
+        if (currTile == null)
+            return null;
+        return _paletteData.GetSpriteForPosition(currTile.palettePosition);
     }
 
     public bool TrashCanSelected()
     {
-        if (currTile != null && currTile._paletteData != null)
-        {
-            return currTile._paletteData.TrashCanCheck(currTile.palettePosition);
-        }
-        return false;
+        if (currTile == null) return false;
+        
+        return _paletteData.TrashCanCheck(currTile.palettePosition);
     }
 }

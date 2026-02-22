@@ -15,32 +15,28 @@ public class RobotCore : RobotComponent
     {
         _components.Remove(component);
     }
-    public override void DestroySelf()
-    {
-        Debug.Log("Core cannot be deleted");
-    }
 
-    public void SpawnComponents()
-    {
-        GameObject child = Instantiate(temp, transform);
-        child.transform.localPosition = new Vector3(1, 0);
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            transform.position += new Vector3(1, 0);
-        }
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            transform.position += new Vector3(-1, 0);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            SpawnComponents();
-        }
-    }
+    // public void SpawnComponents()
+    // {
+    //     GameObject child = Instantiate(temp, transform);
+    //     child.transform.localPosition = new Vector3(1, 0);
+    // }
+    //
+    // private void Update()
+    // {
+    //     if (Input.GetKeyDown(KeyCode.D))
+    //     {
+    //         transform.position += new Vector3(1, 0);
+    //     }
+    //     if (Input.GetKeyDown(KeyCode.A))
+    //     {
+    //         transform.position += new Vector3(-1, 0);
+    //     }
+    //
+    //     if (Input.GetKeyDown(KeyCode.Space))
+    //     {
+    //         SpawnComponents();
+    //     }
+    // }
 
 }

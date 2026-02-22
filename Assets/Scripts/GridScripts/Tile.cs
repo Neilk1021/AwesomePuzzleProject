@@ -14,111 +14,48 @@ public class Tile : MonoBehaviour
     [SerializeField] private GameObject highlight;
 
     public Vector2Int gridPosition;
-    public GridData _gridData;
     public Vector2Int palettePosition;
-    public PaletteData _paletteData;
-    public SpriteRenderer itemsRenderer;
+    
     [SerializeField] private PaletteManager _paletteManager;
     [SerializeField] private GridManager _gridManager;
-    [SerializeField] private PlacementPreview _placementPreview;
+
+    private bool _isGridTile;
+    private bool _isPaletteTile;
     
-    public void Initialize(Vector2Int pos, GridData data, PaletteManager manager, PlacementPreview placementPreview)
+    public void InitializeGrid(Vector2Int pos, GridManager manager)
     {
         gridPosition = pos;
-        _gridData = data;
-        _paletteManager = manager;
-        _placementPreview = placementPreview;
+        _gridManager = manager;
+        _isGridTile = true;
     }
 
-    public void InitializePalette(Vector2Int pos, PaletteData data, PaletteManager manager)
+    public void InitializePalette(Vector2Int pos, PaletteManager manager)
     {
         palettePosition = pos;
-        _paletteData = data;
         _paletteManager = manager;
-
-        // Get single sprite
-        Sprite sprite = data.GetSpriteForPosition(pos);
-
-        if (itemsRenderer != null && sprite != null)
-        {
-            itemsRenderer.sprite = sprite;
-        }
+        _isPaletteTile = true;
     }
 
     void OnMouseDown()
     {
-        if (_paletteData != null)
+        if (_isGridTile)
         {
-            Debug.Log($"Clicked palette tile at: {palettePosition}");
-            Sprite selectedSprite = _paletteData.GetSpriteForPosition(palettePosition);
+            _gridManager.HandleGridClick(gridPosition);
+        }
+
+        if (_isPaletteTile)
+        {
             _paletteManager.SelectTile(this);
-            //tell manager
-        }
-        else if (_gridData != null)
-        {
-            Debug.Log($"Clicked grid tile at: {gridPosition}");
-            // ask manager and update
-            if (_paletteManager != null)
-            {
-                //trash can
-                if (_paletteManager.TrashCanSelected())
-                {
-                    Debug.Log($"Trash can selected");
-                    if (itemsRenderer != null)
-                    {
-                        itemsRenderer.sprite = null;
-                    }
-
-                    _gridData.Remove(gridPosition.x,  gridPosition.y);
-
-                    _paletteManager.ClearTileSelection();
-                    
-                    return;
-                }
-                
-                /*if (_gridManager.CoreLocationSelected())
-                {
-                    Debug.Log($"Core selected");
-
-                    _paletteManager.ClearTileSelection();
-                    
-                    return;
-                }*/
-                
-                Tile selectedTile = _paletteManager.GetSelectedTile();
-                if (selectedTile != null)
-                {
-                    //Sprite selectedSprite = _paletteData.GetSpriteForPosition(selectedTile.palettePosition);
-                    Sprite selectedSprite = _paletteManager.GetSelectedItemSprite();
-                    if (itemsRenderer != null && selectedSprite != null)
-                    {
-                        // Update visual
-                        itemsRenderer.sprite = selectedSprite;
-                        itemsRenderer.transform.rotation =
-                            Quaternion.Euler(0f, 0f, _placementPreview.GetCurrentRotation());
-                        
-                        // Logic component
-                        
-                    }
-                    _paletteManager.ClearTileSelection();
-                }
-                else
-                {
-                    Debug.Log("No palette tile selected!");
-                }
-            }
-        }
-        else
-        {
-            Debug.LogWarning("Tile not initialized!");
+            return;
         }
         
 
     }
 
-    private void OnMouseUp()
+    public void SetIcon(Sprite sprite)
     {
-        
+        if (spriteRenderer == null) return;
+        spriteRenderer.sprite = sprite;
     }
     
     void SetAlpha(float alpha)

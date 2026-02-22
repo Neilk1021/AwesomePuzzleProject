@@ -6,29 +6,71 @@ public class RobotComponentData
 {
     public Vector2Int GridPosition;
     public int Rotation; // 0,90,180,270
+    public RobotComponentType Type;
 
     public bool canConnectFromLeft;
     public bool canConnectFromRight;
     public bool canConnectFromTop;
     public bool canConnectFromBottom;
 
-    public GameObject prefab;
+    public bool IsCore => Type == RobotComponentType.Core;
 
     public RobotComponentData(
         Vector2Int gridPosition,
         int rotation,
-        GameObject prefab,
-        bool left,
-        bool right,
-        bool top,
-        bool bottom)
+        RobotComponentType type)
     {
         GridPosition = gridPosition;
         Rotation = rotation;
-        this.prefab = prefab;
-        canConnectFromLeft = left;
-        canConnectFromRight = right;
-        canConnectFromTop = top;
-        canConnectFromBottom = bottom;
+        Type = type;
+        
+        SetBaseConnections(type);
+        ApplyRotation();
+    }
+    
+    void SetBaseConnections(RobotComponentType type)
+    {
+        switch (type)
+        {
+            case RobotComponentType.Core:
+                canConnectFromLeft = true;
+                canConnectFromRight = true;
+                canConnectFromTop = true;
+                canConnectFromBottom = true;
+                break;
+
+            case RobotComponentType.Fan:
+                canConnectFromRight = true;
+                break;
+
+            case RobotComponentType.Wheel:
+                canConnectFromBottom = true;
+                break;
+            
+            case RobotComponentType.Magnet:
+                canConnectFromRight = true;
+                break;
+            
+        }
+    }
+
+    public void ApplyRotation()
+    {
+        int steps = Rotation / 90;
+
+        for (int i = 0; i < steps; i++)
+        {
+            RotateClockwise();
+        }
+    }
+
+    void RotateClockwise()
+    {
+        bool temp = canConnectFromRight;
+        canConnectFromTop = canConnectFromLeft;
+        canConnectFromLeft = canConnectFromBottom;
+        canConnectFromBottom = canConnectFromRight;
+        canConnectFromRight = temp;
+
     }
 }

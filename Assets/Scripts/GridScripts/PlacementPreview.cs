@@ -7,7 +7,6 @@ public class PlacementPreview : MonoBehaviour
 {
     [SerializeField] private PaletteManager paletteManager;
     [SerializeField] private SpriteRenderer previewSprite;
-    [SerializeField] private GridManager gridManager;
     [SerializeField] private GridData gridData;
     
     private Camera _mainCamera;
@@ -47,31 +46,16 @@ public class PlacementPreview : MonoBehaviour
     
     void UpdatePreviewSprite()
     {
-        if (!paletteManager)
-        {
-            return;
-        }
-
-        if (paletteManager.TrashCanSelected())
-        {
-            previewSprite.enabled = true;
-            previewSprite.sprite = null; // get an overlay thing
-            previewSprite.color = new Color(1f, 0f, 0f, 0.4f);
-            return;
-        }
-
-        Sprite selectedSprite = paletteManager.GetSelectedItemSprite();
-
-        if (selectedSprite)
-        {
-            previewSprite.enabled = true;
-            previewSprite.sprite = selectedSprite;
-            previewSprite.color = new Color(1f, 1f, 1f, 0.4f);
-        }
-        else
+        RobotComponentType type = paletteManager.GetSelectedComponentType();
+        if (type == RobotComponentType.None)
         {
             previewSprite.enabled = false;
+            return;
         }
+        
+        previewSprite.enabled = true;
+        previewSprite.sprite = paletteManager.GetSelectedSprite();
+        previewSprite.color = new Color(1f, 1f, 1f, 0.4f);
     }
 
     void FollowMouse()
