@@ -29,24 +29,72 @@ public class GridData : MonoBehaviour
 
     public bool ValidateBot()
     {
+        int coreCount = 0;
+        
         for (int row= 0; row < height; row++)
         {
             for (int col = 0; col < width; col++)
             {
+                
                 RobotComponentData component = _grid[row, col];
-                if (component == null || component is RobotCore)
+                if (component == null)
                     continue;
-                if (!(
-                    (component.canConnectFromLeft && HasComponentAt(row, col-1)) || 
-                    (component.canConnectFromRight && HasComponentAt(row, col+1)) ||
-                    (component.canConnectFromTop && HasComponentAt(row-1, col)) ||
-                    (component.canConnectFromBottom && HasComponentAt(row+1, col))
-                    ))
+                if (component.IsCore)
                 {
-                    return false;
+                    coreCount++;
+                    continue;
                 }
+                
+                bool hasValidConnection = false;
+                
+                // Top
+                if (!hasValidConnection && component.canConnectFromTop && HasComponentAt(row - 1, col))
+                {
+                    var neighbor = _grid[row - 1, col];
+                    if (neighbor.canConnectFromBottom)
+                    {
+                        hasValidConnection = true;
+                    }
+                }
+                
+                // Left
+                if (!hasValidConnection && component.canConnectFromLeft && HasComponentAt(row, col - 1))
+                {
+                    var neighbor = _grid[row, col-1];
+                    if (neighbor.canConnectFromRight)
+                    {
+                        hasValidConnection = true;
+                    }
+                }
+                
+                // Bottom
+                if (!hasValidConnection && component.canConnectFromBottom && HasComponentAt(row + 1, col))
+                {
+                    var neighbor = _grid[row + 1, col];
+                    if (neighbor.canConnectFromTop)
+                    {
+                        hasValidConnection = true;
+                    }
+                }
+                
+                // Right
+                if (!hasValidConnection && component.canConnectFromRight && HasComponentAt(row, col + 1))
+                {
+                    var neighbor = _grid[row, col + 1];
+                    if (neighbor.canConnectFromLeft)
+                    {
+                        hasValidConnection = true;
+                    }
+                }
+
+                if (!hasValidConnection)
+                    return false;
             }
         }
+
+        if (coreCount != 1)
+            return false;
+        
 
         return true;
     }
