@@ -99,6 +99,11 @@ public class GridData : MonoBehaviour
         return true;
     }
 
+    public void printValidate()
+    {
+        Debug.Log($"Validate Grid Data: {ValidateBot()}");
+    }
+
     private bool HasComponentAt(int x, int y)
     {
         if (x < 0 || y < 0 || x >= width || y >= height)

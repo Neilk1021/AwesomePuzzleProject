@@ -48,7 +48,7 @@ public class RobotComponentData
                 break;
             
             case RobotComponentType.Magnet:
-                canConnectFromRight = true;
+                canConnectFromBottom = true;
                 break;
             
         }
