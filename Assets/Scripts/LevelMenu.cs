@@ -25,6 +25,7 @@ public class LevelMenu : MonoBehaviour
     {
         string sceneName = "Level" + level;
         print("Going to Scene: " + sceneName);
+		Time.timeScale = 1;
         SceneManager.LoadScene(sceneName);
     }
 
