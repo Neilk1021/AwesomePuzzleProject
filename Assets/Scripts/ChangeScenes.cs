@@ -9,4 +9,10 @@ public class ChangeScenes : MonoBehaviour
     {
         SceneManager.LoadScene("LevelMenu");
     }
+
+	public void GoToMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+
+    }
 }
