@@ -194,7 +194,7 @@ public class GridData : MonoBehaviour
 
     private bool HasComponentAt(int x, int y)
     {
-        if (x < 0 || y < 0 || x >= width || y >= height)
+        if (x < 0 || y < 0 || x >= height || y >= width)
             return false;
         else
             return _grid[x, y] != null;
