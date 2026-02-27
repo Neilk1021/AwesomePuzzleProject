@@ -15,6 +15,8 @@ public class RobotSpawner : MonoBehaviour
             GameObject robot = gridBuilder.BuildRobot(); 
             robot.transform.position = transform.position;
             if (_cameraFollow != null && robot != null)
+                _cameraFollow = Camera.main.GetComponent<CameraFollow>();
+            if (_cameraFollow != null)
                 _cameraFollow.SetTarget(robot.transform);
             
             GridManager gridManager = FindObjectOfType<GridManager>();

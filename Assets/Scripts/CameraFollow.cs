@@ -19,5 +19,6 @@ public class CameraFollow : MonoBehaviour
     public void SetTarget(Transform target)
     {
         _target = target;
+        Debug.Log($"Camera now following: {target.name}");
     }
 }

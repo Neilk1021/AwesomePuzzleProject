@@ -5,8 +5,9 @@ using UnityEngine;
 
 public class Fan : RobotComponent
 {
-    [SerializeField] private float _thrust = .01f;
-    [SerializeField] private float _maxThrust = .2f;
+    [SerializeField] private float _thrust = 0.5f;
+    [SerializeField] private float _maxThrust = 1f;
+    [SerializeField] private Vector2 _localThrustDir = Vector2.up;
     private Rigidbody2D _rb;
     private List<Fan> _allFans;
 
@@ -20,14 +21,13 @@ public class Fan : RobotComponent
 
     void Update()
     {
-        //if (_rb == null) return;
-        if (_allFans[0] != this) return; // Only first fan drives
+        if (_allFans[0] != this) return;
 
         if (Input.GetKey(KeyCode.Space))
         {
-            // More fans = more upward speed, capped at maxThrust
             float totalThrust = Mathf.Min(_thrust * _allFans.Count, _maxThrust);
-            _rb.AddForce(Vector2.up * totalThrust);
+            Vector2 worldDir = transform.TransformDirection(_localThrustDir);
+            _rb.AddForce(worldDir * totalThrust);
         }
     }
 }

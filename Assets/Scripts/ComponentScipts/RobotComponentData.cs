@@ -41,6 +41,7 @@ public class RobotComponentData
 
             case RobotComponentType.Fan:
                 canConnectFromRight = true;
+                canConnectFromTop = true;
                 break;
 
             case RobotComponentType.Wheel:
