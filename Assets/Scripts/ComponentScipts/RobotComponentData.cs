@@ -44,13 +44,20 @@ public class RobotComponentData
                 break;
 
             case RobotComponentType.Wheel:
-                canConnectFromBottom = true;
+                canConnectFromTop = true;
                 break;
             
             case RobotComponentType.Magnet:
                 canConnectFromBottom = true;
                 break;
-            
+
+            case RobotComponentType.BuildingBlock:
+                canConnectFromLeft = true;
+                canConnectFromRight = true;
+                canConnectFromTop = true;
+                canConnectFromBottom = true;
+                break;
+
         }
     }
 
