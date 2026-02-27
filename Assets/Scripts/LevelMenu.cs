@@ -15,6 +15,12 @@ public class LevelMenu : MonoBehaviour
         SetUpButtons();
         int unlockedLevel = PlayerPrefs.GetInt("UnlockedLevel", 1);
         DisableLockedLevels(unlockedLevel);
+        
+        GridManager gridManager = FindObjectOfType<GridManager>();
+        if (gridManager != null)
+        {
+            Destroy(gridManager.gameObject);
+        }
     }
     /// <summary>
     /// Call this function to open Scene with name Level[level].
@@ -28,6 +34,7 @@ public class LevelMenu : MonoBehaviour
         //print("Going to Scene: " + sceneName);
         SceneManager.LoadScene("grid + palette");
     }
+    
 
     public void ClearLevelsUnlockedStatus()
     {

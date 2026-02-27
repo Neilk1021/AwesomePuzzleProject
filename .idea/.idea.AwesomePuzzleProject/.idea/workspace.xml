@@ -3,13 +3,15 @@
   <component name="ChangeListManager">
     <list default="true" id="0def18d7-8166-4717-aa99-8d3215f42bc4" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.AwesomePuzzleProject/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.AwesomePuzzleProject/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/building_block.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/building_block.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/core.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/core.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/fan.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/fan.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/magnet.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/magnet.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/wheel.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/wheel.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Level1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Level1.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/grid + palette.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/grid + palette.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GridScripts/GridBuilder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GridScripts/GridBuilder.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GridScripts/GridData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GridScripts/GridData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GridScripts/GridManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GridScripts/GridManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/BuildSceneManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/BuildSceneManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/LevelMenu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/LevelMenu.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/RobotSpawner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/RobotSpawner.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,7 +108,7 @@
       <workItem from="1771891553819" duration="1000" />
       <workItem from="1771891563373" duration="9000" />
       <workItem from="1771891597474" duration="301000" />
-      <workItem from="1772092270979" duration="5986000" />
+      <workItem from="1772092270979" duration="8431000" />
     </task>
     <servers />
   </component>

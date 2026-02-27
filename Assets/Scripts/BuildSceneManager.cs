@@ -10,17 +10,12 @@ public class BuildSceneManager : MonoBehaviour
     
     public void OnPlayButtonClicked()
     {
-        Debug.Log("Button was clicked!"); 
-        
-        if (_gridData == null)
-        {
-            Debug.LogError("GridData is NULL! Assign it in Inspector!"); // ← Will show red
-            return;
-        }
+        Debug.Log("Button was clicked"); 
+        SceneManager.LoadScene("Level1");
 
         if (!_gridData.ValidateBot())
         {
-            Debug.Log("Validation FAILED"); 
+            Debug.Log("Invalid robot only 1 core and all pieces connected");
             return;
         }
 
