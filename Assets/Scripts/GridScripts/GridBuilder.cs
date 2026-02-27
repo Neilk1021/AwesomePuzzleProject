@@ -90,7 +90,7 @@ public class GridBuilder : MonoBehaviour
     
     private Vector3 GridToWorld(Vector2Int gridPosition, int height, int width)
     {
-        Vector3 offset = new Vector3(-width / 2f + 0.5f, -height / 2f + 0.5f, 0);
-        return new Vector3(gridPosition.y, gridPosition.x, 0) + offset;
+        Vector3 offset = new Vector3(-width / 2f + 0.5f, height / 2f + 0.5f, 0);
+        return new Vector3(gridPosition.y, -gridPosition.x, 0) + offset;
     }
 }
