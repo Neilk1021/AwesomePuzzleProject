@@ -26,7 +26,7 @@ public class GridData : MonoBehaviour
         if (!IsInside(row, col)) return;
         _grid[row, col] = null;
     }
-
+    
     public bool ValidateBot()
     {
         int coreCount = 0;
@@ -98,7 +98,7 @@ public class GridData : MonoBehaviour
 
         return true;
     }
-
+    
     public void printValidate()
     {
         Debug.Log($"Validate Grid Data: {ValidateBot()}");
@@ -126,6 +126,8 @@ public class GridData : MonoBehaviour
     {
         return row >= 0 && row < height && col >= 0 && col < width;
     }
+    
+    
 
 }
 

@@ -16,8 +16,12 @@ public class GridManager : MonoBehaviour
 
     private void Awake()
     {
+        DontDestroyOnLoad(gameObject);
+        
         _gridData.Initialize();
         _gridBuilder.Build(_gridData, this);
+        
+        _gridBuilder.BuildRobot();
         
         PlaceCore();
     }

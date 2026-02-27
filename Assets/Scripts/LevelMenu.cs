@@ -23,9 +23,10 @@ public class LevelMenu : MonoBehaviour
     /// <param name="level"></param>
     public void OpenLevel(int level)
     {
-        string sceneName = "Level" + level;
-        print("Going to Scene: " + sceneName);
-        SceneManager.LoadScene(sceneName);
+        PlayerPrefs.SetInt("TargetLevel", level);
+        //string sceneName = "Level" + level;
+        //print("Going to Scene: " + sceneName);
+        SceneManager.LoadScene("grid + palette");
     }
 
     public void ClearLevelsUnlockedStatus()

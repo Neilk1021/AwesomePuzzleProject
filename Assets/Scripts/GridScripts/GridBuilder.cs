@@ -93,4 +93,67 @@ public class GridBuilder : MonoBehaviour
         Vector3 offset = new Vector3(-width / 2f + 0.5f, -height / 2f + 0.5f, 0);
         return new Vector3(gridPosition.y, gridPosition.x, 0) + offset;
     }
+    
+    public GameObject BuildRobot(Transform robotParent = null)
+    {
+        RobotComponentData coreData = null;
+    
+    for (int row = 0; row < _gridData.height; row++)
+    {
+        for (int col = 0; col < _gridData.width; col++)
+        {
+            RobotComponentData data = _gridData.Get(row, col);
+            if (data != null && data.IsCore)
+            {
+                coreData = data;
+                break;
+            }
+        }
+        if (coreData != null) break;
+    }
+    
+    if (coreData == null)
+    {
+        Debug.LogError("No core found! Cannot build robot.");
+        return null;
+    }
+    
+    GameObject corePrefab = prefabLibrary.GetPrefab(coreData.Type);
+    Vector3 coreWorldPos = GridToWorld(coreData.GridPosition, _gridData.height, _gridData.width);
+    
+    GameObject coreObj = Instantiate(
+        corePrefab,
+        coreWorldPos,
+        Quaternion.Euler(0f, 0f, coreData.Rotation),
+        robotParent
+    );
+    coreObj.name = "Core";
+    
+    for (int row = 0; row < _gridData.height; row++)
+    {
+        for (int col = 0; col < _gridData.width; col++)
+        {
+            RobotComponentData data = _gridData.Get(row, col);
+            
+            if (data == null || data.IsCore) continue; // Skip empty + core 
+            
+            GameObject prefab = prefabLibrary.GetPrefab(data.Type);
+            if (prefab == null) continue;
+            
+            // Position relative to core
+            Vector2Int offset = data.GridPosition - coreData.GridPosition;
+            Vector3 localPos = new Vector3(offset.y, offset.x, 0); 
+            
+            GameObject obj = Instantiate(prefab, coreObj.transform); 
+            obj.transform.localPosition = localPos;
+            obj.transform.localRotation = Quaternion.Euler(0f, 0f, data.Rotation);
+            obj.name = data.Type.ToString();
+            
+            Debug.Log($"Spawned {data.Type} at local pos {localPos}");
+        }
+    }
+    
+    Debug.Log("Robot built successfully!");
+    return coreObj; // Return root for PlayerController etc. 
+    }
 }
