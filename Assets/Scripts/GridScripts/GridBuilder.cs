@@ -72,7 +72,15 @@ public class GridBuilder : MonoBehaviour
         Vector3 position = GridToWorld(data.GridPosition, _gridData.height, _gridData.width);
         
         GameObject obj = Instantiate(prefab, position, Quaternion.Euler(0f, 0f, data.Rotation), componentParent);
-        
+
+        BoxCollider2D collider = obj.GetComponent<BoxCollider2D>();
+        RobotComponent robotComponent = obj.GetComponent<RobotComponent>();
+        if (collider != null) 
+            collider.enabled = false;
+        if (robotComponent != null)
+            robotComponent.enabled = false;
+
+
         _spawnedComponents.Add(data.GridPosition, obj);
         
         
