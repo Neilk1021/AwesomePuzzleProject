@@ -32,7 +32,8 @@ public class LevelMenu : MonoBehaviour
         PlayerPrefs.SetInt("TargetLevel", level);
         //string sceneName = "Level" + level;
         //print("Going to Scene: " + sceneName);
-        SceneManager.LoadScene("grid + palette");
+        //SceneManager.LoadScene("grid + palette");
+        SceneManager.LoadScene("BuildScene");
     }
     
 

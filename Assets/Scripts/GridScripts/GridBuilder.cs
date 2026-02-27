@@ -128,6 +128,10 @@ public class GridBuilder : MonoBehaviour
             robotParent
         );
         coreObj.name = "Core";
+        
+        RobotComponent coreComponent = coreObj.GetComponent<RobotComponent>();
+        if (coreComponent != null)
+            coreComponent.Initialize(coreData);
     
         for (int row = 0; row < _gridData.height; row++)
         {
@@ -152,6 +156,10 @@ public class GridBuilder : MonoBehaviour
                 Debug.Log($"Spawned {data.Type} at local pos {localPos}");
             }
         }
+        Rigidbody2D rb = coreObj.AddComponent<Rigidbody2D>();
+        rb.gravityScale = 1f;
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
     
         Debug.Log("Robot built successfully!");
         return coreObj; // Return root for PlayerController etc. 

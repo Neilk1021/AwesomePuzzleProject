@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class RobotSpawner : MonoBehaviour
 {
+    [SerializeField] private CameraFollow _cameraFollow;
     // Start is called before the first frame update
     void Start()
     {
@@ -11,7 +12,11 @@ public class RobotSpawner : MonoBehaviour
 
         if (gridBuilder != null)
         {
-            gridBuilder.BuildRobot();
+            GameObject robot = gridBuilder.BuildRobot(); 
+            robot.transform.position = transform.position;
+            if (_cameraFollow != null && robot != null)
+                _cameraFollow.SetTarget(robot.transform);
+            
             GridManager gridManager = FindObjectOfType<GridManager>();
             if (gridManager != null)
             {

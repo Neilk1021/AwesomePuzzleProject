@@ -11,7 +11,7 @@ public class BuildSceneManager : MonoBehaviour
     public void OnPlayButtonClicked()
     {
         Debug.Log("Button was clicked"); 
-        SceneManager.LoadScene("Level1");
+        //SceneManager.LoadScene("Level1");
 
         if (!_gridData.ValidateBot())
         {

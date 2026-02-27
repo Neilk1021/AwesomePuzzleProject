@@ -20,10 +20,9 @@ public class GridManager : MonoBehaviour
         
         _gridData.Initialize();
         _gridBuilder.Build(_gridData, this);
-        
-        _gridBuilder.BuildRobot();
-        
         PlaceCore();
+
+
     }
 
     void PlaceCore()
