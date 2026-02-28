@@ -13,6 +13,12 @@ public class RobotSpawner : MonoBehaviour
         if (gridBuilder != null)
         {
             GameObject robot = gridBuilder.BuildRobot(); 
+            if (robot != null)
+            {
+                robot.tag = "Robot";
+                robot.transform.position = transform.position;
+                robot.AddComponent<RobotCollisions>();
+            }
             robot.transform.position = transform.position;
             if (_cameraFollow != null && robot != null)
                 _cameraFollow = Camera.main.GetComponent<CameraFollow>();

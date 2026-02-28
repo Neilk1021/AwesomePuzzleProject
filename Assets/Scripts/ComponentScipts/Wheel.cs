@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Wheel : RobotComponent
 {
-    [SerializeField] private float _speed = 1f;
-    [SerializeField] private float _maxSpeed = 3f; 
+    [SerializeField] private float _speed = 3f;
+    [SerializeField] private float _maxSpeed = 8f; 
     private Rigidbody2D _rb;
     private List<Wheel> _allWheels;
 

@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class Fan : RobotComponent
 {
-    [SerializeField] private float _thrust = 0.5f;
-    [SerializeField] private float _maxThrust = 1f;
+    [SerializeField] private float _thrust = 2f;
+    [SerializeField] private float _maxThrust = 8f;
     [SerializeField] private Vector2 _localThrustDir = Vector2.up;
     private Rigidbody2D _rb;
     private List<Fan> _allFans;
@@ -27,7 +27,7 @@ public class Fan : RobotComponent
         {
             float totalThrust = Mathf.Min(_thrust * _allFans.Count, _maxThrust);
             Vector2 worldDir = transform.TransformDirection(_localThrustDir);
-            _rb.AddForce(worldDir * totalThrust);
+            _rb.AddForce(Vector2.up  * totalThrust);
         }
     }
 }
