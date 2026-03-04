@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Wheel : RobotComponent
 {
-    [SerializeField] private float _speed = 3f;
-    [SerializeField] private float _maxSpeed = 8f; 
+    [SerializeField] private float _speed = 30f;
+    [SerializeField] private float _maxSpeed = 1000f; 
     private Rigidbody2D _rb;
     private List<Wheel> _allWheels;
 
@@ -32,6 +32,8 @@ public class Wheel : RobotComponent
 
         // More wheels = faster, but capped at maxSpeed
         float totalSpeed = Mathf.Min(_speed * _allWheels.Count, _maxSpeed);
+        
+        print("Wheel update: " + totalSpeed + " speed");
         _rb.velocity = new Vector2(moveInput * totalSpeed, _rb.velocity.y);
     }
 }
