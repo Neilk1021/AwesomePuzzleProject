@@ -4,65 +4,36 @@ using UnityEngine;
 
 public class RobotComponentData
 {
+    public RobotComponentSO Definition;
     public Vector2Int GridPosition;
     public int Rotation; // 0,90,180,270
-    public RobotComponentType Type;
 
     public bool canConnectFromLeft;
     public bool canConnectFromRight;
     public bool canConnectFromTop;
     public bool canConnectFromBottom;
 
-    public bool IsCore => Type == RobotComponentType.Core;
+    public bool IsCore => Definition.type == RobotComponentType.Core;
+    public RobotComponentType Type => Definition.type;
 
     public RobotComponentData(
         Vector2Int gridPosition,
         int rotation,
-        RobotComponentType type)
+        RobotComponentSO definition)
     {
         GridPosition = gridPosition;
         Rotation = rotation;
-        Type = type;
+        Definition = definition;
         
-        SetBaseConnections(type);
+        canConnectFromLeft   = definition.canConnectFromLeft;
+        canConnectFromRight  = definition.canConnectFromRight;
+        canConnectFromTop    = definition.canConnectFromTop;
+        canConnectFromBottom = definition.canConnectFromBottom;
+        
         ApplyRotation();
     }
-    
-    void SetBaseConnections(RobotComponentType type)
-    {
-        switch (type)
-        {
-            case RobotComponentType.Core:
-                canConnectFromLeft = true;
-                canConnectFromRight = true;
-                canConnectFromTop = true;
-                canConnectFromBottom = true;
-                break;
 
-            case RobotComponentType.Fan:
-                canConnectFromRight = true;
-                canConnectFromTop = true;
-                break;
-
-            case RobotComponentType.Wheel:
-                canConnectFromTop = true;
-                break;
-            
-            case RobotComponentType.Magnet:
-                canConnectFromBottom = true;
-                break;
-
-            case RobotComponentType.BuildingBlock:
-                canConnectFromLeft = true;
-                canConnectFromRight = true;
-                canConnectFromTop = true;
-                canConnectFromBottom = true;
-                break;
-
-        }
-    }
-
-    public void ApplyRotation()
+    void ApplyRotation()
     {
         int steps = Rotation / 90;
 

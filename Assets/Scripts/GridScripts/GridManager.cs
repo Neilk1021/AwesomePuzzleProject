@@ -9,6 +9,7 @@ public class GridManager : MonoBehaviour
     [SerializeField] private GridBuilder _gridBuilder;
     [SerializeField] private PaletteManager _paletteManager;
     [SerializeField] private PlacementPreview _placementPreview;
+    [SerializeField] private ComponentLibrarySO _componentLibrary;
     
     private RobotCore _robotCore;
     public Tile currTile;
@@ -16,19 +17,19 @@ public class GridManager : MonoBehaviour
 
     private void Awake()
     {
+        _componentLibrary.Initalize();
         _gridData.Initialize();
         _gridBuilder.Build(_gridData, this);
-        PlaceCore();
-
-
+        // PlaceCore();
+        
     }
 
-    void PlaceCore()
-    {
-        var core = new RobotComponentData(new Vector2Int(3, 1), 0, RobotComponentType.Core );
-        _gridData.Add(core);
-        _gridBuilder.Rebuild();
-    }
+    // void PlaceCore()
+    // {
+    //     var core = new RobotComponentData(new Vector2Int(3, 1), 0, RobotComponentType.Core );
+    //     _gridData.Add(core);
+    //     _gridBuilder.Rebuild();
+    // }
 
     /// <summary>
     /// Called by grid tile when clicked
@@ -53,9 +54,11 @@ public class GridManager : MonoBehaviour
 
     private void PlaceComponent(RobotComponentType type, Vector2Int pos)
     {
-        int rotation = _placementPreview.GetCurrentRotation();
+        RobotComponentSO def = _componentLibrary.Get(type);
+        if (def == null) return;
         
-        var newData = new RobotComponentData(pos, rotation, type);
+        int rotation = _placementPreview.GetCurrentRotation();
+        var newData = new RobotComponentData(pos, rotation, def);
         
         _gridData.Add(newData);
         _gridBuilder.Rebuild();
