@@ -7,22 +7,9 @@
     <list default="true" id="0def18d7-8166-4717-aa99-8d3215f42bc4" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.AwesomePuzzleProject/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.AwesomePuzzleProject/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/grid + palette.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/grid + palette.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ComponentScipts/BuildingBlock.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ComponentScipts/BuildingBlock.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ComponentScipts/Fan.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ComponentScipts/Fan.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ComponentScipts/Grabber.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ComponentScipts/Grabber.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ComponentScipts/Magnet.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ComponentScipts/Magnet.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ComponentScipts/RobotComponentData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ComponentScipts/RobotComponentData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ComponentScipts/RobotCore.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ComponentScipts/RobotCore.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ComponentScipts/Wheel.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ComponentScipts/Wheel.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ScriptableObjects/Wheel.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ScriptableObjects/Wheel.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/GridScripts/GridBuilder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GridScripts/GridBuilder.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GridScripts/GridManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GridScripts/GridManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/RobotSpawner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/RobotSpawner.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GridScripts/GridData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GridScripts/GridData.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -129,7 +116,8 @@
       <workItem from="1772092270979" duration="8431000" />
       <workItem from="1772215525385" duration="2375000" />
       <workItem from="1772241906894" duration="1650000" />
-      <workItem from="1772608503357" duration="6807000" />
+      <workItem from="1772608503357" duration="7402000" />
+      <workItem from="1772705432479" duration="3976000" />
     </task>
     <servers />
   </component>

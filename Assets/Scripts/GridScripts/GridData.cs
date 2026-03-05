@@ -4,6 +4,10 @@ using System.ComponentModel;
 using UnityEngine;
 using static UnityEngine.RuleTile.TilingRuleOutput;
 
+/// <summary>
+/// Holds grid data in a 2D array
+/// NO KNOWLEDGE OF UI
+/// </summary>
 public class GridData : MonoBehaviour
 {
     public int height = 6;

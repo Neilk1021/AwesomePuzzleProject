@@ -1,6 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
+/// <summary>
+/// Responsible for GridUI
+/// Build initial empty grid and rebuilds any new added or delete components
+/// NO KNOWLEDGE OF USER INPUT
+/// </summary>
 public class GridBuilder : MonoBehaviour
 {
     [Header("Tiles")]
