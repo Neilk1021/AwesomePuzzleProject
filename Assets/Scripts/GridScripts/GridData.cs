@@ -36,142 +36,131 @@ public class GridData : MonoBehaviour
 
     public bool ValidateBot()
     {
-        int coreCount = 0;
-        int componentCount = 0;
-        RobotComponentData core = null;
-        var corePosition = (-1, -1);
+        // Find Core
+        var corePosition = FindCore();
+        if (corePosition == null)
+        {
+            Debug.Log("No core found.");
+            return false;
+        }
+        
+        // Check if every component is reachable from Core
+        int totalComponents = CountComponents();
+        int reached = BFS(corePosition.Value);
 
+        if (reached != totalComponents)
+        {
+            Debug.Log("All components CANNOT be reached from Core");
+            return false;
+        }
+        
+        // Every component has at least one valid connection
         for (int row = 0; row < height; row++)
         {
             for (int col = 0; col < width; col++)
             {
-                RobotComponentData component = _grid[row, col];
+                var component = _grid[row, col];
+                if (component == null || component.IsCore) continue;
 
-                if (component == null)
-                    continue;
-                if (component.IsCore)
+                if (!HasValidConnection(row, col))
                 {
-                    coreCount++;
-                    componentCount++;
-                    core = component;
-                    corePosition = (row, col);
-                    continue;
-                }
-                else
-                {
-                    componentCount++;
-                }
-            }
-
-        }
-
-
-        if (coreCount != 1)
-        {
-            print("more than 1 core: coreCount=" + coreCount);
-            return false;
-        }
-
-        var checkQueue = new Queue<(int x, int y)>();
-        var checkedPos = new List<(int x, int y)>();
-        int checkedComponentCount = 0;
-
-        checkQueue.Enqueue(corePosition);
-        checkedPos.Add(corePosition);
-        do
-        {
-            var currPos = checkQueue.Dequeue();
-            RobotComponentData currComp = _grid[currPos.x, currPos.y];
-            checkedComponentCount++;
-            print("checking " + currComp.Type + " at (" + currPos.x + ", " + currPos.y + ")");
-            var neighbors = GetNeighborPositions(currPos.x, currPos.y);
-            foreach (var pos in neighbors)
-            {
-                if (!checkedPos.Contains(pos))
-                {
-                    checkedPos.Add(pos);
-                    if (HasComponentAt(pos.x, pos.y))
-                        checkQueue.Enqueue((pos.x, pos.y));
-                }
-            }
-            if (checkedComponentCount > 500)
-            {
-                print("infinite loop YAY");
-                return false;
-            }
-        } while (checkQueue.Count > 0);
-
-        if (checkedComponentCount != componentCount)
-        {
-            print("checkedComponentCount != componentCount: "+checkedComponentCount+" != "+componentCount);
-            return false;
-        }
-
-        for (int row = 0; row < height; row++)
-        {
-            for (int col = 0; col < width; col++)
-            {
-
-                RobotComponentData component = _grid[row, col];
-                if (component == null)
-                    continue;
-                if (component.IsCore)
-                    continue;
-                
-
-                bool hasValidConnection = false;
-
-                // Top
-                if (!hasValidConnection && component.canConnectFromTop && HasComponentAt(row - 1, col))
-                {
-                    var neighbor = _grid[row - 1, col];
-                    if (neighbor.canConnectFromBottom)
-                    {
-                        hasValidConnection = true;
-                    }
-                }
-
-                // Left
-                if (!hasValidConnection && component.canConnectFromLeft && HasComponentAt(row, col - 1))
-                {
-                    var neighbor = _grid[row, col - 1];
-                    if (neighbor.canConnectFromRight)
-                    {
-                        hasValidConnection = true;
-                    }
-                }
-
-                // Bottom
-                if (!hasValidConnection && component.canConnectFromBottom && HasComponentAt(row + 1, col))
-                {
-                    var neighbor = _grid[row + 1, col];
-                    if (neighbor.canConnectFromTop)
-                    {
-                        hasValidConnection = true;
-                    }
-                }
-
-                // Right
-                if (!hasValidConnection && component.canConnectFromRight && HasComponentAt(row, col + 1))
-                {
-                    var neighbor = _grid[row, col + 1];
-                    if (neighbor.canConnectFromLeft)
-                    {
-                        hasValidConnection = true;
-                    }
-                }
-
-                if (!hasValidConnection)
-                {
-                    print("invalid connection on " + component.Type + " at (" + row + ", " + col + ")");
+                    Debug.Log($"Invalid connection: {component.Type} at ({row}, {col})");
                     return false;
                 }
             }
         }
-
-
-
+        
         return true;
+    }
+    
+    ///// HELPER FUNCTIONS /////
+
+    /// Returns core position if there is only ONE CORE
+    /// Returns null if coreCount != 1
+    private (int x, int y)? FindCore()
+    {
+        int coreCount = 0;
+        (int x, int y)? corePos = null;
+
+        for (int row = 0; row < height; row++)
+        {
+            for (int col = 0; col < width; col++)
+            {
+                if (_grid[row, col] != null && _grid[row, col].IsCore)
+                {
+                    corePos = (col, row);
+                    coreCount++;
+                }
+            }
+        }
+        return coreCount == 1 ? corePos : null;
+    }
+    
+    /// Returns number of components
+    private int CountComponents()
+    {
+        int count = 0;
+        for (int row = 0; row < height; row++)
+        {
+            for (int col = 0; col < width; col++)
+            {
+                if (_grid[row, col] != null) count++;
+            }
+        }
+        
+        return count;
+    }
+    
+    /// Queue to check all component's neighbors
+    /// HashSet to store visited components
+    private int BFS((int x, int y) start)
+    {
+        var queue = new Queue<(int x, int y)>();
+        var visited = new HashSet<(int x, int y)>();
+        
+        queue.Enqueue(start);
+        visited.Add(start);
+
+        while (queue.Count > 0)
+        {
+            var (x, y) = queue.Dequeue();
+            foreach (var neighbor in GetNeighborPositions(x, y))
+            {
+                if (!visited.Contains(neighbor) && HasComponentAt(neighbor.x, neighbor.y))
+                {
+                    visited.Add(neighbor);
+                    queue.Enqueue(neighbor);
+                }
+            }
+        }
+        
+        return visited.Count;
+    }
+    
+    /// Uses a tuple for directions
+    /// Checks if a component at row, col has at least one valid connection
+    private bool HasValidConnection(int row, int col)
+    {
+        var c = _grid[row, col];
+
+        var checks =
+            new (int rowOffset, int colOffset, bool canConnect, System.Func<RobotComponentData, bool> neighborMustHave)
+                []
+                {
+                    (-1, 0, c.canConnectFromTop, n => n.canConnectFromBottom),
+                    (0, -1, c.canConnectFromLeft, n => n.canConnectFromRight),
+                    (1, 0, c.canConnectFromBottom, n => n.canConnectFromTop),
+                    (0, 1, c.canConnectFromRight, n => n.canConnectFromLeft),
+                };
+
+        foreach (var (rowOffset, colOffset, canConnect, neighborMustHave) in checks)
+        {
+            if (!canConnect) continue;
+            var neighbor = HasComponentAt(row + rowOffset, col + colOffset) ? _grid[row + rowOffset, col + colOffset] : null;
+            if (neighbor != null && neighborMustHave(neighbor)) return true;
+        }
+
+        return false;
     }
 
     private List<(int x, int y)> GetNeighborPositions(int x, int y)
@@ -207,11 +196,6 @@ public class GridData : MonoBehaviour
     public RobotComponentData Get(int x, int y)
     {
         return _grid[x, y];
-    }
-
-    public bool CoreCheck(Vector2Int pos)
-    {
-        return (pos.x == height - 1 && pos.y == width - 1);
     }
     
     public bool IsInside(int row, int col)
