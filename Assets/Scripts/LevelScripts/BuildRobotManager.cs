@@ -28,8 +28,9 @@ public class BuildRobotManager : MonoBehaviour
         
         Debug.Log($"Core transform: {coreObj.transform.position}");
         
-        SpawnComponents(gridData, coreData, coreObj);
         AttachPhysics(coreObj);
+        SpawnComponents(gridData, coreData, coreObj);
+        coreObj.AddComponent<PlayerController>();
         
         _activeRobot = coreObj;
         Debug.Log("Spawned robot.");
