@@ -26,13 +26,13 @@ public class BuildRobotManager : MonoBehaviour
         
         GameObject coreObj = SpawnCore(coreData, _spawnPoint.position);
         
+        Debug.Log($"Core transform: {coreObj.transform.position}");
+        
         SpawnComponents(gridData, coreData, coreObj);
         AttachPhysics(coreObj);
         
         _activeRobot = coreObj;
-        
         Debug.Log("Spawned robot.");
-        
         return _activeRobot;
     }
 
@@ -51,10 +51,14 @@ public class BuildRobotManager : MonoBehaviour
                 Vector2Int gridOffset = data.GridPosition - coreData.GridPosition;
                 Vector3 localpos = new Vector3(gridOffset.y, -gridOffset.x, 0);
                 
-                GameObject obj = Instantiate(prefab, localpos, Quaternion.Euler(0, 0, coreData.Rotation));
+                GameObject obj = Instantiate(prefab, coreObj.transform);
                 obj.transform.localPosition = localpos;
                 obj.transform.localRotation = Quaternion.Euler(0, 0, data.Rotation);
                 obj.name = data.Type.ToString();
+                
+                Debug.Log($"Core grid pos: {coreData.GridPosition}");
+                Debug.Log($"Component: {data.Type} grid pos: {data.GridPosition} offset: {gridOffset} localPos: {localpos}");
+                Debug.Log($"Component transform: {obj.transform.position}");
                 
                 if (obj.TryGetComponent<RobotComponent>(out var comp))
                     comp.Initialize(data);
@@ -63,7 +67,7 @@ public class BuildRobotManager : MonoBehaviour
     }
     
 
-    private void DestroyRobot()
+    public void DestroyRobot()
     {
         if (_activeRobot != null)
         {

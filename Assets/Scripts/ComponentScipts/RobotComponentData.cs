@@ -39,17 +39,24 @@ public class RobotComponentData
 
         for (int i = 0; i < steps; i++)
         {
-            RotateClockwise();
+            RotateCounterClockwise();
         }
     }
 
-    void RotateClockwise()
+    void RotateCounterClockwise()
     {
-        bool temp = canConnectFromRight;
-        canConnectFromTop = canConnectFromLeft;
-        canConnectFromLeft = canConnectFromBottom;
-        canConnectFromBottom = canConnectFromRight;
-        canConnectFromRight = temp;
+        // bool temp = canConnectFromRight;
+        // canConnectFromTop = canConnectFromLeft;
+        // canConnectFromLeft = canConnectFromBottom;
+        // canConnectFromBottom = canConnectFromRight;
+        // canConnectFromRight = temp;
+        
+        
+        bool temp            = canConnectFromTop;
+        canConnectFromTop    = canConnectFromRight;
+        canConnectFromRight  = canConnectFromBottom;
+        canConnectFromBottom = canConnectFromLeft;
+        canConnectFromLeft   = temp;
 
     }
 }

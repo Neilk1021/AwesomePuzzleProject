@@ -7,7 +7,7 @@ public class GameStateManager : MonoBehaviour
     [SerializeField] private GridData _gridData;
     [SerializeField] private GridBuilder _gridBuilder;
     [SerializeField] private GameObject _gridLayer;
-    //[SerializeField] private RobotBuilder _robotBuilder;
+    [SerializeField] private BuildRobotManager _robotBuilder;
     
     public bool IsPlaying { get; private set; }
 
@@ -22,7 +22,7 @@ public class GameStateManager : MonoBehaviour
         }
         
         _gridLayer.SetActive(false);
-        //_robotBuilder.BuildRobot(_gridData);
+        _robotBuilder.BuildRobot(_gridData);
         IsPlaying = true;
     }
 
@@ -31,7 +31,7 @@ public class GameStateManager : MonoBehaviour
         
         if (!IsPlaying) return;
         
-        //_robotBuilder.DestroyRobot();
+        _robotBuilder.DestroyRobot();
         _gridLayer.SetActive(true);
         IsPlaying = false;
         

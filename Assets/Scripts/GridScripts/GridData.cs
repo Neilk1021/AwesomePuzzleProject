@@ -24,6 +24,7 @@ public class GridData : MonoBehaviour
     public void Add(RobotComponentData component)
     {
         if (!IsInside(component.GridPosition.x, component.GridPosition.y)) return;
+        Debug.Log($"Adding {component.Type} at {component.GridPosition}");
         _grid[component.GridPosition.x, component.GridPosition.y] = component;
     }
 
@@ -88,7 +89,7 @@ public class GridData : MonoBehaviour
             {
                 if (_grid[row, col] != null && _grid[row, col].IsCore)
                 {
-                    corePos = (col, row);
+                    corePos = (row, col);
                     coreCount++;
                 }
             }
