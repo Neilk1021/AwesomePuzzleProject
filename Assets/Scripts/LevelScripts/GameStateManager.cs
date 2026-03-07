@@ -8,8 +8,17 @@ public class GameStateManager : MonoBehaviour
     [SerializeField] private GridBuilder _gridBuilder;
     [SerializeField] private GameObject _gridLayer;
     [SerializeField] private BuildRobotManager _robotBuilder;
+    [SerializeField] private RectTransform playButton;
+    [SerializeField] private RectTransform gobacktobuildButton;
     
     public bool IsPlaying { get; private set; }
+
+    void Start()
+    {
+        IsPlaying = false;
+        gobacktobuildButton.gameObject.SetActive(false);
+        EnterBuildPhase();
+    }
 
     public void EnterPlayState()
     {
@@ -21,6 +30,9 @@ public class GameStateManager : MonoBehaviour
             return;
         }
         
+        playButton.gameObject.SetActive(false);
+        gobacktobuildButton.gameObject.SetActive(true);
+        
         _gridLayer.SetActive(false);
         _robotBuilder.BuildRobot(_gridData);
         IsPlaying = true;
@@ -30,6 +42,9 @@ public class GameStateManager : MonoBehaviour
     {
         
         if (!IsPlaying) return;
+        
+        playButton.gameObject.SetActive(true);
+        gobacktobuildButton.gameObject.SetActive(false);
         
         _robotBuilder.DestroyRobot();
         _gridLayer.SetActive(true);
