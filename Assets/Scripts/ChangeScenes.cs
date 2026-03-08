@@ -5,8 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class ChangeScenes : MonoBehaviour
 {
-    public void GoToLevelMenu()
+    [SerializeField] private string _sceneName;
+
+    public void LoadScene()
     {
-        SceneManager.LoadScene("LevelMenu");
+        SceneManager.LoadScene(_sceneName);
     }
 }
