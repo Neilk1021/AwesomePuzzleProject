@@ -76,7 +76,10 @@ public class GridBuilder : MonoBehaviour
         Vector3 position = GridToWorld(data.GridPosition, _gridData.height, _gridData.width);
         
         GameObject obj = Instantiate(prefab, position, Quaternion.Euler(0f, 0f, data.Rotation), componentParent);
-
+        
+        obj.layer = LayerMask.NameToLayer("Ignore Raycast");
+        
+        
         BoxCollider2D collider = obj.GetComponent<BoxCollider2D>();
         RobotComponent robotComponent = obj.GetComponent<RobotComponent>();
         if (collider != null) 

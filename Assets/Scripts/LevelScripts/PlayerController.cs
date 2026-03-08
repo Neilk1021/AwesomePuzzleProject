@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour
     {
         float horizontalInput = Input.GetAxis("Horizontal");
         float thrustInput = Input.GetAxis("Jump");
+        bool magnetInput = Input.GetKey(KeyCode.E);
 
         if (horizontalInput != 0)
         {
@@ -38,20 +39,27 @@ public class PlayerController : MonoBehaviour
 
         if (thrustInput > 0)
         {
-            Debug.Log("THRUST");
+            Debug.Log("Thrust");
             foreach (Fan fan in _fans)
                 fan.ApplyThrust();
         }
 
-        if (Input.GetKeyDown(KeyCode.F))
+        if (magnetInput)
         {
-            Debug.Log("F");
             _magnetsActive = !_magnetsActive;
             
             foreach (var magnet in _magnets)
             {
-                if(_magnetsActive) magnet.Activate();
-                else magnet.Deactivate();
+                if (_magnetsActive)
+                {
+                    Debug.Log($"Magnet active");
+                    magnet.Activate();
+                }
+                else
+                {
+                    Debug.Log($"Magnet off");
+                    magnet.Deactivate();
+                }
             }
         }
     }

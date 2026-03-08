@@ -19,8 +19,10 @@ public class Magnet : RobotComponent
 
     public void Activate()
     {
+        
         _isActive = true;
         _collider.enabled = true;
+        
     }
 
     public void Deactivate()

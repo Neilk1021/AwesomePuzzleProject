@@ -10,7 +10,6 @@ public class SpecialCrate : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log("I'm a crate");
         _rigidbody = GetComponent<Rigidbody2D>();
     }
 
@@ -23,19 +22,24 @@ public class SpecialCrate : MonoBehaviour
         {
             _targetMagnet = magnet;
             _isAttracted = true;
+            
+            _rigidbody.interpolation = RigidbodyInterpolation2D.None;
+            _rigidbody.bodyType = RigidbodyType2D.Kinematic;
         }
-
-        _rigidbody.bodyType = RigidbodyType2D.Kinematic;
+        
     }
 
     public void OnMagnetDeactivate(Magnet magnet)
     {
+        
         if (_targetMagnet != magnet) return;
         _isAttracted = false;
         _targetMagnet = null;
-        _rigidbody.velocity = Vector2.zero;
         
+        _rigidbody.velocity = Vector2.zero;
+        _rigidbody.interpolation = RigidbodyInterpolation2D.Interpolate;
         _rigidbody.bodyType = RigidbodyType2D.Dynamic;
+        
     }
 
     private void FixedUpdate()
@@ -55,9 +59,12 @@ public class SpecialCrate : MonoBehaviour
             return;
         }
         
-        Vector2 newPos = Vector2.MoveTowards(_rigidbody.position, anchor, Time.fixedDeltaTime * _attractSpeed);
+        Vector2 newPos = Vector2.MoveTowards(
+            _rigidbody.position, 
+            anchor, 
+            Time.fixedDeltaTime * _attractSpeed);
 
         _rigidbody.MovePosition(newPos);
-        _rigidbody.velocity = Vector2.zero;
+        // _rigidbody.velocity = Vector2.zero;
     }
 }

@@ -56,6 +56,7 @@ public class BuildRobotManager : MonoBehaviour
                 obj.transform.localPosition = localpos;
                 obj.transform.localRotation = Quaternion.Euler(0, 0, data.Rotation);
                 obj.name = data.Type.ToString();
+                obj.layer = LayerMask.NameToLayer("Robot");
                 
                 Debug.Log($"Core grid pos: {coreData.GridPosition}");
                 Debug.Log($"Component: {data.Type} grid pos: {data.GridPosition} offset: {gridOffset} localPos: {localpos}");
@@ -99,6 +100,8 @@ public class BuildRobotManager : MonoBehaviour
         
         if (coreObj.TryGetComponent<RobotComponent>(out var comp))
             comp.Initialize(coreData);
+        
+        coreObj.layer = LayerMask.NameToLayer("Robot");
         
         return coreObj;
     }
