@@ -10,8 +10,7 @@ public class Wheel : RobotComponent
     {
         base.Initialize(data);
         _rigidbody = GetComponentInParent<Rigidbody2D>();
-        Debug.Log(_rigidbody == null);
-        
+
     }
 
     public void ApplyMovement(float input)

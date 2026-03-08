@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class PlayerController : MonoBehaviour
 {
     private List<Wheel> _wheels = new List<Wheel>();
+    private List<Fan> _fans = new List<Fan>();
     private Rigidbody _rigidbody;
 
     private void Awake()
@@ -13,13 +14,27 @@ public class PlayerController : MonoBehaviour
         
         _wheels.AddRange(GetComponentsInChildren<Wheel>());
         Debug.Log($"{_wheels.Count} wheels found.");
+        
+        _fans.AddRange(GetComponentsInChildren<Fan>());
+        Debug.Log($"{_fans.Count} fans found.");
     }
 
     private void FixedUpdate()
     {
-        float input = Input.GetAxis("Horizontal");
-        
-        foreach (Wheel wheel in _wheels)
-            wheel.ApplyMovement(input);
+        float horizontalInput = Input.GetAxis("Horizontal");
+        float thrustInput = Input.GetAxis("Jump");
+
+        if (horizontalInput != 0)
+        {
+            foreach (Wheel wheel in _wheels)
+                wheel.ApplyMovement(horizontalInput);
+        }
+
+        if (thrustInput > 0)
+        {
+            Debug.Log("THRUST");
+            foreach (Fan fan in _fans)
+                fan.ApplyThrust();
+        }
     }
 }

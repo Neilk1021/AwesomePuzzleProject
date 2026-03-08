@@ -5,29 +5,21 @@ using UnityEngine;
 
 public class Fan : RobotComponent
 {
-    // [SerializeField] private float _thrust = 2f;
-    // [SerializeField] private float _maxThrust = 8f;
-    // [SerializeField] private Vector2 _localThrustDir = Vector2.up;
-    // private Rigidbody2D _rb;
-    // private List<Fan> _allFans;
+    private Rigidbody2D _rigidbody;
 
-    // void Start()
-    // {
-    //     _rb = GetComponentInParent<Rigidbody2D>();
-    //     _allFans = new List<Fan>(
-    //         transform.root.GetComponentsInChildren<Fan>()
-    //     );
-    // }
-    //
-    // void Update()
-    // {
-    //     if (_allFans[0] != this) return;
-    //
-    //     if (Input.GetKey(KeyCode.Space))
-    //     {
-    //         float totalThrust = Mathf.Min(_thrust * _allFans.Count, _maxThrust);
-    //         Vector2 worldDir = transform.TransformDirection(_localThrustDir);
-    //         _rb.AddForce(Vector2.up  * totalThrust);
-    //     }
-    // }
+    public override void Initialize(RobotComponentData data)
+    {
+        base.Initialize(data);
+        _rigidbody = GetComponentInParent<Rigidbody2D>();
+    }
+    
+    public void ApplyThrust()
+    {
+        if (_rigidbody == null) return;
+
+        float thrust = Data.Definition.thrustForce;
+        float angel = ((Data.Rotation + 270) % 360) * Mathf.Deg2Rad;
+        Vector2 direction = new Vector2(-Mathf.Sin(angel), Mathf.Cos(angel));
+        _rigidbody.AddForce(direction * thrust, ForceMode2D.Impulse);
+    }
 }
