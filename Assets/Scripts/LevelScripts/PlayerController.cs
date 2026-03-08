@@ -6,7 +6,10 @@ public class PlayerController : MonoBehaviour
 {
     private List<Wheel> _wheels = new List<Wheel>();
     private List<Fan> _fans = new List<Fan>();
+    private List<Magnet> _magnets = new List<Magnet>();
     private Rigidbody _rigidbody;
+
+    private bool _magnetsActive;
 
     private void Awake()
     {
@@ -17,6 +20,9 @@ public class PlayerController : MonoBehaviour
         
         _fans.AddRange(GetComponentsInChildren<Fan>());
         Debug.Log($"{_fans.Count} fans found.");
+        
+        _magnets.AddRange(GetComponentsInChildren<Magnet>());
+        Debug.Log($"{_magnets.Count} magnets found.");
     }
 
     private void FixedUpdate()
@@ -35,6 +41,18 @@ public class PlayerController : MonoBehaviour
             Debug.Log("THRUST");
             foreach (Fan fan in _fans)
                 fan.ApplyThrust();
+        }
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            Debug.Log("F");
+            _magnetsActive = !_magnetsActive;
+            
+            foreach (var magnet in _magnets)
+            {
+                if(_magnetsActive) magnet.Activate();
+                else magnet.Deactivate();
+            }
         }
     }
 }

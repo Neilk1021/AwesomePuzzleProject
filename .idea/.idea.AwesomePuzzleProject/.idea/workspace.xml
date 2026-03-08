@@ -6,8 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="0def18d7-8166-4717-aa99-8d3215f42bc4" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.AwesomePuzzleProject/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.AwesomePuzzleProject/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ComponentScipts/Components/Fan.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ComponentScipts/Components/Fan.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ComponentScipts/Components/Wheel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ComponentScipts/Components/Wheel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/magnet.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/magnet.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/grid + palette.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/grid + palette.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ScriptableObjects/Fan.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ScriptableObjects/Fan.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ScriptableObjects/Magnet.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ScriptableObjects/Magnet.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ComponentScipts/Components/Magnet.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ComponentScipts/Components/Magnet.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/LevelScripts/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/LevelScripts/PlayerController.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -22,6 +25,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/LevelMenuTemp/Levels Panel.prefab" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/CameraFollow.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/ChangeScenes.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/ComponentScipts/Components/SpecialCrate.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/ComponentScipts/RobotComponentSO.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/LevelScripts/GameStateManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/LevelScripts/PlayerController.cs" root0="FORCE_HIGHLIGHTING" />
@@ -120,7 +124,7 @@
       <workItem from="1772705432479" duration="5039000" />
       <workItem from="1772779458679" duration="6837000" />
       <workItem from="1772879905828" duration="10018000" />
-      <workItem from="1772924821703" duration="4596000" />
+      <workItem from="1772924821703" duration="11444000" />
     </task>
     <servers />
   </component>
