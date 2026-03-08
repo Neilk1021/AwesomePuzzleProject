@@ -4,21 +4,38 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    [SerializeField] private Transform _target;    
     [SerializeField] private float _smoothSpeed = 5f;
-    [SerializeField] private Vector3 _offset = new Vector3(0, 0, -10); 
+    [SerializeField] private float _lookAheadDistance = 6f;
 
-    void LateUpdate()
-    {
-        //if (_target == null) return;
+    private Transform _target;
+    private Rigidbody _targetrb;
+    private bool _isFollowing;
 
-        Vector3 targetPos = _target.position + _offset;
-        transform.position = Vector3.Lerp(transform.position, targetPos, _smoothSpeed * Time.deltaTime);
-    }
-    
-    public void SetTarget(Transform target)
+    private static readonly Vector3 BuildModePosition = new Vector3(0, 0, -10);
+
+    public void FollowTarget(Transform target)
     {
         _target = target;
-        Debug.Log($"Camera now following: {target.name}");
+        _targetrb = _target.GetComponent<Rigidbody>();
+        _isFollowing = true;
+    }
+
+    public void ReturnToBuildMode()
+    {
+        _target = null;
+        _isFollowing = false;
+        transform.position = BuildModePosition;
+    }
+
+    private void LateUpdate()
+    {
+        if (!_isFollowing || _target == null) return;
+
+        Vector3 lookAhead = Vector3.zero;
+        if(_targetrb != null)
+            lookAhead = (Vector3)_targetrb.velocity.normalized * _lookAheadDistance;
+        
+        Vector3 targetPos = new  Vector3(_target.position.x + lookAhead.x, _target.position.y + lookAhead.y, -10f);
+        transform.position = Vector3.Lerp(transform.position, targetPos, _smoothSpeed * Time.deltaTime);
     }
 }

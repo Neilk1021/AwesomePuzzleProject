@@ -9,6 +9,8 @@ public class GameStateManager : MonoBehaviour
     [SerializeField] private GameObject _gridLayer;
     [SerializeField] private BuildRobotManager _robotBuilder;
     [SerializeField] private LevelManager _levelManager;
+    [SerializeField] private CameraFollow _cameraFollow;
+    
     [SerializeField] private RectTransform playButton;
     [SerializeField] private RectTransform gobacktobuildButton;
     
@@ -35,8 +37,8 @@ public class GameStateManager : MonoBehaviour
         gobacktobuildButton.gameObject.SetActive(true);
         _levelManager.NewStart();
         _gridLayer.SetActive(false);
-        _robotBuilder.BuildRobot(_gridData);
-        
+        GameObject robot = _robotBuilder.BuildRobot(_gridData);
+        _cameraFollow.FollowTarget(robot.transform);
         
         IsPlaying = true;
     }
@@ -51,6 +53,8 @@ public class GameStateManager : MonoBehaviour
         
         _robotBuilder.DestroyRobot();
         _gridLayer.SetActive(true);
+        _cameraFollow.ReturnToBuildMode();
+        
         IsPlaying = false;
         
     }
