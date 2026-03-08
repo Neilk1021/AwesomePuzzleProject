@@ -12,9 +12,11 @@ public class BuildRobotManager : MonoBehaviour
     [SerializeField] private Transform _spawnPoint;
 
     private GameObject _activeRobot;
+    private GridData _lastGridData;
 
     public GameObject BuildRobot(GridData gridData)
     {
+        _lastGridData = gridData;
         DestroyRobot();
         
         RobotComponentData coreData = FindCore(gridData);
@@ -33,8 +35,18 @@ public class BuildRobotManager : MonoBehaviour
         coreObj.AddComponent<PlayerController>();
         
         _activeRobot = coreObj;
+        coreObj.tag = "Robot";
         Debug.Log("Spawned robot.");
         return _activeRobot;
+    }
+
+    public GameObject RebuildRobot()
+    {
+        Debug.Log("Rebuilding robot...");
+        if(_lastGridData != null)
+            return BuildRobot(_lastGridData);
+
+        return null;
     }
 
     private void SpawnComponents(GridData gridData, RobotComponentData coreData, GameObject coreObj)
@@ -113,4 +125,6 @@ public class BuildRobotManager : MonoBehaviour
         coreRB.constraints = RigidbodyConstraints2D.FreezeRotation;
         coreRB.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
     }
+    
+    
 }

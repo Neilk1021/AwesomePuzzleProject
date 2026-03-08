@@ -16,6 +16,8 @@ public class Killzone : MonoBehaviour
     void OnTriggerEnter2D(Collider2D col)
     {
 	    if (col.gameObject.CompareTag("Robot") || col.transform.root.CompareTag("Robot"))
+	    {
 		    GameOutcomes.Instance?.Lose();
+	    }
     }
 }
