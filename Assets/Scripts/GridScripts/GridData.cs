@@ -24,7 +24,6 @@ public class GridData : MonoBehaviour
     public void Add(RobotComponentData component)
     {
         if (!IsInside(component.GridPosition.x, component.GridPosition.y)) return;
-        Debug.Log($"Adding {component.Type} at {component.GridPosition}");
         _grid[component.GridPosition.x, component.GridPosition.y] = component;
     }
 

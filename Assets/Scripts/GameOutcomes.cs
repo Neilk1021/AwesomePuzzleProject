@@ -32,6 +32,7 @@ public class GameOutcomes : MonoBehaviour
 
     public void Lose()
     {
+        Debug.Log("Running GameOutcomes LOSE function");
         if (_triggered) return;
         _triggered = true;
         StartCoroutine(LoseSequence());

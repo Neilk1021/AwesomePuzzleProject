@@ -30,7 +30,6 @@ public class PaletteManager : MonoBehaviour
         currTile = tile;
         tile.StartBlinkTile();
 
-        Debug.Log("Selected Tile: " + tile.palettePosition);
     }
 
     public Tile GetSelectedTile()
@@ -42,7 +41,6 @@ public class PaletteManager : MonoBehaviour
     {
         if (currTile != null)
         {
-            Debug.Log("Selected tile cleared: " + currTile.palettePosition);
             currTile.StopBlinkTile();
             currTile = null;
         }
