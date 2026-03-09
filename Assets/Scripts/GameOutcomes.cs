@@ -21,6 +21,8 @@ public class GameOutcomes : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        _winUI.SetActive(false);
+        _loseUI.SetActive(false);
     }
     
     public void Win()
