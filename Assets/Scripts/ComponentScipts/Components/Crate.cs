@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class SpecialCrate : MonoBehaviour
+public class Crate : MonoBehaviour
 {
     [SerializeField] private float _attractSpeed = 5f;
     
@@ -15,10 +15,9 @@ public class SpecialCrate : MonoBehaviour
 
     public void OnMagnetActivate(Magnet magnet)
     {
-        float dist = Vector2.Distance(transform.position, magnet.transform.position);
-        if (dist > magnet.Data.Definition.magnetRange) return;
-
-        if (_targetMagnet == null || dist < Vector2.Distance(transform.position, _targetMagnet.transform.position))
+       
+        if (_targetMagnet == null ||Vector2.Distance(transform.position, magnet.transform.position) 
+            < Vector2.Distance(transform.position, _targetMagnet.transform.position))
         {
             _targetMagnet = magnet;
             _isAttracted = true;

@@ -6,11 +6,17 @@
   <component name="ChangeListManager">
     <list default="true" id="0def18d7-8166-4717-aa99-8d3215f42bc4" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.AwesomePuzzleProject/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.AwesomePuzzleProject/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/special_crate.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/special_crate.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/LevelScripts/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/LevelScripts/PlayerController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Components/magnet.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Components/magnet.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Laser.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Laser.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ComponentScipts/Components/Magnet.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ComponentScipts/Components/Magnet.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ComponentScipts/Components/SpecialCrate.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ComponentScipts/Components/SpecialCrate.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameOutcomes.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameOutcomes.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GridScripts/GridData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GridScripts/GridData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GridScripts/PaletteManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GridScripts/PaletteManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Killzone.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Killzone.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/LevelScripts/BuildRobotManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/LevelScripts/BuildRobotManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/RobotCollisions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/RobotCollisions.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,7 +30,8 @@
     <setting file="file://$PROJECT_DIR$/Assets/LevelMenuTemp/Levels Panel.prefab" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/CameraFollow.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/ChangeScenes.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/ComponentScipts/Components/SpecialCrate.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/ComponentScipts/Components/MagnetSensor.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/ComponentScipts/Components/Special_Crate.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/ComponentScipts/RobotComponentSO.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Laser.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/LevelScripts/GameStateManager.cs" root0="FORCE_HIGHLIGHTING" />

@@ -9,7 +9,10 @@ public class Killzone : MonoBehaviour
     void OnCollisionEnter2D(Collision2D col)
     {
 	    if (col.gameObject.CompareTag("Robot") || col.transform.root.CompareTag("Robot"))
+	    {
+		    Debug.Log("Respawn because robot touched lava/laser");
 		    GameOutcomes.Instance?.Lose();
+	    }
     }
 
     // ← For laser (trigger collider - Is Trigger = true)
@@ -17,6 +20,7 @@ public class Killzone : MonoBehaviour
     {
 	    if (col.gameObject.CompareTag("Robot") || col.transform.root.CompareTag("Robot"))
 	    {
+		    Debug.Log("Respawn because robot touched lava/laser");
 		    GameOutcomes.Instance?.Lose();
 	    }
     }

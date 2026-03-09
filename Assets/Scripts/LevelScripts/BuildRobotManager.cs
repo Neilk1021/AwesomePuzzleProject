@@ -22,13 +22,11 @@ public class BuildRobotManager : MonoBehaviour
         RobotComponentData coreData = FindCore(gridData);
         if (coreData == null)
         {
-            Debug.LogError("No core found. Cannot build robot");
             return null;
         }
         
         GameObject coreObj = SpawnCore(coreData, _spawnPoint.position);
         
-        Debug.Log($"Core transform: {coreObj.transform.position}");
         
         AttachPhysics(coreObj);
         SpawnComponents(gridData, coreData, coreObj);
@@ -70,9 +68,6 @@ public class BuildRobotManager : MonoBehaviour
                 obj.name = data.Type.ToString();
                 obj.layer = LayerMask.NameToLayer("Robot");
                 
-                Debug.Log($"Core grid pos: {coreData.GridPosition}");
-                Debug.Log($"Component: {data.Type} grid pos: {data.GridPosition} offset: {gridOffset} localPos: {localpos}");
-                Debug.Log($"Component transform: {obj.transform.position}");
                 
                 if (obj.TryGetComponent<RobotComponent>(out var comp))
                     comp.Initialize(data);
