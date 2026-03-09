@@ -39,7 +39,6 @@ public class PlayerController : MonoBehaviour
 
         if (thrustInput > 0)
         {
-            Debug.Log("Thrust");
             foreach (Fan fan in _fans)
                 fan.ApplyThrust();
         }
@@ -52,12 +51,10 @@ public class PlayerController : MonoBehaviour
             {
                 if (_magnetsActive)
                 {
-                    Debug.Log($"Magnet active");
                     magnet.Activate();
                 }
                 else
                 {
-                    Debug.Log($"Magnet off");
                     magnet.Deactivate();
                 }
             }
